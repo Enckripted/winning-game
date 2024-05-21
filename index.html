@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>replit</title>
+    
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="bootstrap.css" rel="stylesheet" type="text/css" />
+
+    <script src = 'jquery.js'></script>
+</head>
+
+<body>
+    <div id = 'resources' class = 'row'>
+        <div>
+            <span id = 'n' class = 'counter'>N: 10</span>
+            <span id = 'wp' class = 'd-none counter'>WP: 10</span>
+            <span id = 'debug' class = 'd-inline-block'></span>
+        </div>
+    </div>
+    <div id = 'topbar' class = 'row'>
+        <div>
+            <button id = 'game-tab' class = 'tab'>Game</button>
+            <button id = 'win-tab' class = 'tab d-none'>Winner's Area</button>
+            <button id = 'options-tab' class = 'tab'>Options</button>
+        </div>
+    </div>
+    <div id = 'content' class = 'row'>
+        <div class = 'content d-flex align-items-center justify-content-center flex-column mt-5 overflow-scroll' id = 'game-content'>
+            <p class = 'no-win'>You need a number of 10 to win</p>
+            <h1 id = 'number' class = 'no-win'>0</h1>
+            <p id = 'number-per-sec' class = 'no-win'>+1/s</p>
+            
+            <h1 id = 'win-text' class = 'win'>YOU WIN!</h1>
+            <button id = 'win-button' class = 'win'>Click here to get 1 win point!</button>
+            <p id = 'wp-per-min' class = 'd-none'>WP gain per min: 99.99 K</p>
+
+            <br>
+            <p id = 'auto-win-desc' class = 'auto-win d-none'>Set amount to automatically win on (accepts numbers and scientific notation):</p>
+            <input id = 'auto-win' class = 'auto-win d-none' type = 'text' placeholder = '0'>
+            <span class = 'auto-win d-none'>Auto-win enabled: <input id = 'auto-win-enabled' class = 'auto-win d-none' type = 'checkbox'></span>
+        </div>
+        <div class = 'content d-flex align-items-center justify-content-center flex-column mt-5 overflow-scroll' id = 'win-content'>
+            <div class = 'row'>
+                <div>
+                    <button id = 'win-upgrades-tab' class = 'd-none'>Upgrades</button>
+                    <button id = 'win-village-tab' class = 'd-none'>Village</button>
+                    <button id = 'win-loot-tab' class = 'd-none'>Loot</button>
+                </div>
+            </div>
+            
+            
+            
+            <div id = 'win-upgrades' class = 'text-center'>
+                <p id = 'win-points'>Win points: 0</p>
+                <p id = 'win-amount'>Wins: 0</p>
+                <p id = 'win-time'>Your fastest win was in 10 seconds</p>
+                <div class = 'row text-left'>
+                    <div>
+                        <button id = 'w1' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>Clicking the number increments it by 1.</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 1 WP</p>
+                        </button>
+                        <button id = 'w2' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>You get a multiplier to your number per second based on win points.</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 5 WP</p>
+                        </button>
+                        <button id = 'w3' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>You get a multiplier to your number per second based on fastest win time.</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 10 WP</p>
+                        </button>
+                        <button id = 'w4' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>You can go farther than a number of 10 for extra win points.</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 15 WP</p>
+                        </button>
+                    </div>
+                </div>
+                <div class = 'row'>
+                    <div>
+                        <button id = 'w5' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>You get a multiplier to your number per second based on the amount of wins.</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 100 WP</p>
+                        </button>
+                        <button id = 'w6' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>Get a multiplier to your number per second based on your number.</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 250 WP</p>
+                        </button>
+                        <button id = 'w7' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>Get a multiplier to your number per second based on your highest number.</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 300 WP</p>
+                        </button>
+                        <button id = 'w8' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>Unlock Auto-Win</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 500 WP</p>
+                        </button>
+                    </div>
+                </div>
+                <div class = 'row'>
+                    <div>
+                        <button id = 'w9' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>Multiplier to WP gain and win gain depending on time spent this run.</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 4.00 K WP</p>
+                        </button>
+                        <button id = 'w10' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>See your WP per minute based on your WP gain + multiplier to your number based on your WP gain.</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 15.00 K WP</p>
+                        </button>
+                        <button id = 'w11' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>Gain a multiplier to your number per second based on your lowest previous upgrade's multiplier (excludes win time upgrade)</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 40.00 K WP</p>
+                        </button>
+                        <button id = 'w12' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>Unlock the Village.</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 200.00 K WP</p>
+                        </button>
+                    </div>
+                </div>
+                <div class = 'row'>
+                    <div>
+                        <button id = 'w13' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>Gain wins based on 25% the speed of your fastest win.</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 1.00 M WP</p>
+                        </button>
+                        <button id = 'w14' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>Decrease building cost scaling in the village</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 250.00 M WP</p>
+                        </button>
+                        <button id = 'w15' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>Make the factory's bonus much better.</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 2.00 B WP</p>
+                        </button>
+                        <button id = 'w16' class = 'win-upgrade'>
+                            <p class = 'win-upgrade-desc'>Unlock Loot</p>
+                            <p class = 'win-upgrade-effect'></p>
+                            <p class = 'win-upgrade-cost'>Cost: 30.00 B WP</p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div id = 'win-village' class = 'text-center d-none'>
+                <br>
+                <h6 id = 'pop'>You have a population of 0, providing a x1 boost to number gain (x1.1 per person)</h6>
+                <p id = 'pop-growth'>+1 pop/sec - capped at 0</p>
+                <div class = 'row'>
+                    <div class = 'col-4'>
+                        <p id = 'farm'>Farms: 0</p>
+                        <p id = 'farm-cost'>Cost: 100</p>
+                        <button id = 'farm-buy'>Buy 1</button>
+                        <button id = 'farm-remove'>Remove 1</button>
+                        <p id = 'farm-effect'>Your farms are boosting reproduction chance by +0.00%</p>
+
+                        <br>
+
+                        <p id = 'packaging'>Packaging Plants: 0</p>
+                        <p id = 'packaging-cost'>Cost: 100</p>
+                        <button id = 'packaging-buy'>Buy 1</button>
+                        <button id = 'packaging-remove'>Remove 1</button>
+                        <p id = 'packaging-effect'>Your packaging plants are packaging 0 lootboxes a second</p>
+                    </div>
+                    <div class = 'col-4'>
+                        <p id = 'house'>Houses: 0</p>
+                        <p id = 'house-cost'>Cost: 100</p>
+                        <button id = 'house-buy'>Buy 1</button>
+                        <button id = 'house-remove'>Remove 1</button>
+                        <p id = 'house-effect'>Your houses increase the population cap by +0</p>
+                    </div>
+                    <div class = 'col-4'>
+                        <p id = 'lab'>Factories: 0</p>
+                        <p id = 'lab-cost'>Cost: 100</p>
+                        <button id = 'lab-buy'>Buy 1</button>
+                        <button id = 'lab-remove'>Remove 1</button>
+                        <p id = 'lab-effect'>Your labs multiply win point gain by x1.00</p>
+                    </div>
+                </div>
+            </div>
+            <div id = 'win-loot' class = 'text-center d-none'>
+                <br>
+                <p id = 'lootbox-amount'>You have 0 lootboxes</p>
+                <h1>You unboxed:</h1>
+                <h4 id = 'loot-unbox'>Nothing!</h4>
+                <button id = 'unbox' class = 'mt-3'>Unbox</button>
+                <button id = 'equip'>Equip</button>
+
+                <div class = 'mt-5'>
+                    <div id = 'loot-head' class = 'loot-slot text-center'>
+                        <h5>Head</h5>
+                        <h4 class = 'loot-name'>Nothing</h4>
+                        <button class = 'mt-3'>Discard</button>
+                    </div>
+                    <div id = 'loot-chest' class = 'loot-slot text-center'>
+                        <h5>Chest</h5>
+                        <h4 class = 'loot-name'>Nothing</h4>
+                        <button class = 'mt-3'>Discard</button>
+                    </div>
+                    <div id = 'loot-legs' class = 'loot-slot text-center'>
+                        <h5>Legs</h5>
+                        <h4 class = 'loot-name'>Nothing</h4>
+                        <button class = 'mt-3'>Discard</button>
+                    </div>
+                    <div id = 'loot-feet' class = 'loot-slot text-center'>
+                        <h5>Feet</h5>
+                        <h4 class = 'loot-name'>Nothing</h4>
+                        <button class = 'mt-3'>Discard</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class = 'content d-flex justify-content-center flex-column mt-5 overflow-scroll' id = 'options-content'>
+            <div>
+                <button id = 'save'>Manual Save</button>
+                <button id = 'export'>Copy Save to Clipboard</button>
+                <button id = 'import'>Import Save</button>
+                <button id = 'reset'>Reset Game</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onerror = function(err, _, line){
+            if(true) return
+            alert(err + " - " + line)
+        }
+    </script>
+    <script src = "main.js"></script>
+</body>
+
+</html>
